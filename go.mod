@@ -1,4 +1,4 @@
-module github.com/go-game-dev/dtm-proto
+module github.com/shkodnick/dtm-proto
 
 go 1.22.7
 
