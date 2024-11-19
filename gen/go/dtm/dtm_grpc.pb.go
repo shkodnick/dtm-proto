@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.28.3
-// source: dtm/dtm.proto
+// source: proto/dtm/dtm.proto
 
 package dtm
 
@@ -269,5 +269,5 @@ var TaskManagerService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "dtm/dtm.proto",
+	Metadata: "proto/dtm/dtm.proto",
 }

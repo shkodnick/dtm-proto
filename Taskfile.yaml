@@ -1,15 +1,13 @@
-# ./Taskfile.yaml
-# See: https://taskfile.dev/api/  
+version: "3"
 
-version: "3"  
-
-tasks:  
+tasks:
   default:
-    cmds:  
-      - task: generate  
+    cmds:
+      - task: generate
+
   generate:
     aliases:
-      - gen  
-    desc: "Generate code from proto files"  
+      - gen
+    desc: "Generate code from proto files"
     cmds:
-      - protoc -I proto proto/dtm/dtm.proto --go_out=./gen/go/ --go_opt=paths=source_relative --go-grpc_out=./gen/go/ --go-grpc_opt=paths=source_relative
+      - protoc -I . -I ./google/api --go_out=./gen/go/ --go_opt=paths=source_relative --go-grpc_out=./gen/go/ --go-grpc_opt=paths=source_relative --grpc-gateway_out=./gen/go/ --grpc-gateway_opt=paths=source_relative proto/dtm/dtm.proto

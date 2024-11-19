@@ -6,8 +6,10 @@ option go_package = "github.com/go-game-dev/dtm;dtm";
 
 import "google/protobuf/timestamp.proto";
 
+import "google/api/annotations.proto";
+
 message Task {
-  string task_id = 1;
+  string task_id = 1; 
   string title = 2;
   string body = 3;
   bool completed = 4;
@@ -17,11 +19,33 @@ message Task {
 }
 
 service TaskManagerService {
-  rpc CreateTask(TaskRequest) returns (TaskResponse);
-  rpc GetTask(IdTaskRequest) returns (TaskResponse);
-  rpc UpdateTask(TaskRequest) returns (TaskResponse);
-  rpc DeleteTask(IdTaskRequest) returns (DeleteTaskResponse);
-  rpc ListTasks(ListTasksRequest) returns (ListTasksResponse);
+  rpc CreateTask(TaskRequest) returns (TaskResponse) {
+    option (google.api.http) = {
+      post: "/v1/tasks"
+      body: "task"
+    };
+  }
+  rpc GetTask(IdTaskRequest) returns (TaskResponse) {
+    option (google.api.http) = {
+      get: "/v1/tasks/{id}"
+    };
+  }
+  rpc UpdateTask(TaskRequest) returns (TaskResponse) {
+    option (google.api.http) = {
+      put: "/v1/tasks/{task.task_id}"
+      body: "task"
+    };
+  }
+  rpc DeleteTask(IdTaskRequest) returns (DeleteTaskResponse) {
+    option (google.api.http) = {
+      delete: "/v1/tasks/{id}"
+    };
+  }
+  rpc ListTasks(ListTasksRequest) returns (ListTasksResponse) {
+    option (google.api.http) = {
+      get: "/v1/tasks"
+    };
+  }
 }
 
 message TaskRequest {
